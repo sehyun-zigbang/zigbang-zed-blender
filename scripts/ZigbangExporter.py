@@ -116,7 +116,7 @@ def execute():
          # Generate Collections
          model_name = "{}_{}_{}".format(danji_id, room_type_id, level)
          
-         glTf_path = "{}/outputs/glTF".format(path)
+         glTf_path = "{}/assets/glTF".format(path)
          danji_path = '{}/{}'.format(glTf_path, danji_id)
          room_path = '{}/{}'.format(danji_path, room_type_id)
          createFolder(glTf_path)
