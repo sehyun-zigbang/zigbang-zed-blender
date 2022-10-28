@@ -370,7 +370,7 @@ def execute():
          # export glTF
          bpy.ops.export_scene.gltf(
          filepath='{}/{}.gltf'.format(room_path, model_name),
-         export_texture_dir='{}/outputs/textures'.format(path),
+         export_texture_dir='{}/assets/textures'.format(path),
          
          check_existing = True, 
          export_format = 'GLTF_SEPARATE', 
