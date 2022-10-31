@@ -242,12 +242,26 @@ def execute():
                  else:
                      obj.location = (0, 0.1, 0)
              else:
-                 if "Edge_Top" in name:
-                     obj.location = (0, 0.1, 0)
-                 if "Edge_Bottom" in name:
-                     obj.location = (0, -0.1, 0)
-                    
                  collection_frame.objects.link(obj)
+                 if "Edge_Top" in name:
+                     bpy.context.view_layer.objects.active = obj
+                     obj.select_set(True)
+                     obj.location = (0, -0.2, 0)
+                     bpy.ops.object.modifier_add(type='SOLIDIFY')
+                     bpy.context.object.modifiers["Solidify"].thickness = -3
+                     bpy.context.object.modifiers["Solidify"].offset = -1
+                     bpy.ops.object.convert(target='MESH')
+                     obj.select_set(False)
+                 if "Edge_Bottom" in name:
+                     bpy.context.view_layer.objects.active = obj
+                     obj.select_set(True)
+                     obj.location = (0, -0.1, 0)
+                     bpy.ops.object.modifier_add(type='SOLIDIFY')
+                     bpy.context.object.modifiers["Solidify"].thickness = -3
+                     bpy.context.object.modifiers["Solidify"].offset = -1
+                     bpy.ops.object.convert(target='MESH')
+                     obj.select_set(False)
+                    
              
              #------------------------------------
              # Generate UV     
@@ -320,7 +334,7 @@ def execute():
         
          bounds = merge_boxes(bpy.data.objects);
          center = bounds.center
-         bpy.ops.transform.translate(value = (-center.x, 2, -center.z))
+         bpy.ops.transform.translate(value = (-center.x, 3, -center.z))
          bpy.ops.object.transform_apply(location = True, rotation=True, scale=True)
          
          obj.select_set(False)

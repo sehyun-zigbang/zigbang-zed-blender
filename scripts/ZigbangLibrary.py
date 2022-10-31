@@ -277,10 +277,24 @@ class ADDONNAME_OT_generate(bpy.types.Operator):
                  else:
                      collection_frame.objects.link(obj)
                      if "Edge_Top" in name:
-                         obj.location = (0, 0.1, 0)
-#                         bounds = Box(obj);
+                         bpy.context.view_layer.objects.active = obj
+                         obj.select_set(True)
+                         obj.location = (0, -0.2, 0)
+                         bpy.ops.object.modifier_add(type='SOLIDIFY')
+                         bpy.context.object.modifiers["Solidify"].thickness = -3
+                         bpy.context.object.modifiers["Solidify"].offset = -1
+                         bpy.ops.object.convert(target='MESH')
+                         obj.select_set(False)
+                         
                      if "Edge_Bottom" in name:
+                         bpy.context.view_layer.objects.active = obj
+                         obj.select_set(True)
                          obj.location = (0, -0.1, 0)
+                         bpy.ops.object.modifier_add(type='SOLIDIFY')
+                         bpy.context.object.modifiers["Solidify"].thickness = -3
+                         bpy.context.object.modifiers["Solidify"].offset = -1
+                         bpy.ops.object.convert(target='MESH')
+                         obj.select_set(False)
                         
                      #collection_frame.objects.link(obj)
                  
